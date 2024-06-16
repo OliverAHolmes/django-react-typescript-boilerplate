@@ -70,6 +70,9 @@ export default function DataTable() {
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
+        slots={{
+          noRowsOverlay: () => <div style={{ padding: 24 }}> No users</div>,
+        }}
         rows={rows}
         columns={columns}
         loading={loading}
