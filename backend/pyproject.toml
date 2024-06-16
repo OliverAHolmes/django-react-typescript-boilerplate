@@ -15,6 +15,7 @@ drf-yasg = "^1.21.7"
 setuptools = "^70.0.0"
 requests = "^2.32.3"
 pillow = "^10.3.0"
+django-unfold = "^0.28.1"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.9"
