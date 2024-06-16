@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "rgb-earth-backend"
+version = "0.1.0"
+description = ""
+authors = ["Oliver Holmes <oliver.albert.holmes@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "^5.0.6"
+djangorestframework = "^3.15.1"
+django-cors-headers = "^4.3.1"
+django-rest-swagger = "^2.2.0"
+drf-yasg = "^1.21.7"
+setuptools = "^70.0.0"
+requests = "^2.32.3"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.9"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
