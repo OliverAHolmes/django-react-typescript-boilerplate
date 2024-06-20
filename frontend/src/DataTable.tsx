@@ -32,7 +32,7 @@ export default function DataTable() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/users/?format=json"
+          "http://127.0.0.1:8000/users/?format=json"
         );
         const data = await response.json();
 
