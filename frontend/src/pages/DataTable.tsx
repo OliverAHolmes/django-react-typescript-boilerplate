@@ -24,7 +24,7 @@ const columns: GridColDef[] = [
   },
 ];
 
-export default function DataTable() {
+export const DataTable = () => {
   const [rows, setRows] = React.useState<unknown[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
 
@@ -86,4 +86,4 @@ export default function DataTable() {
       />
     </div>
   );
-}
+};

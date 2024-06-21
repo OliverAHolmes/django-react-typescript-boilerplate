@@ -4,42 +4,47 @@ import {
   BrowserRouter,
   Routes,
   Route,
-//   Outlet,
-//   Navigate,
+  //   Outlet,
+  Navigate,
 } from "react-router-dom";
-// import { useSelector } from "react-redux";
-// import { MapNotes } from "./Pages/MapNotes";
 import { Login } from "./pages/Login";
-// import { SignUp } from "./Pages/SignUp";
-// import { Logout } from "./Pages/Logout";
-// import { RootState } from "./redux/store";
+import { Logout } from "./pages/Logout";
+import { DataTable } from "./pages/DataTable";
 
-// import { MapLibreContainer } from "./Components/MapLibreContainer";
+// ProtectedRoute component
+const ProtectedRoute: React.FC<{
+  isLoggedIn: boolean;
+  children: React.ReactNode;
+}> = ({ isLoggedIn, children }) => {
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
 
-// const ProtectedRoute: React.FC<{ isLoggedIn: boolean }> = ({ isLoggedIn }) => {
-//   if (!isLoggedIn) {
-//     return <Navigate to="/login" replace />;
-//   }
+  return <>{children}</>;
+};
 
-//   return <Outlet />;
-// };
+import useAuthStore from "./store/useAuthStore";
 
 const App = () => {
-//   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
-
+  const { isLoggedIn } = useAuthStore();
   return (
     <BrowserRouter>
       <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <DataTable />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/maplibre" element={<MapLibreContainer />} />
-        <Route path="/sign-up" element={<SignUp />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/" element={<MapNotes />} />
         {isLoggedIn ? (
           <Route path="*" element={<Navigate to="/" replace />} />
         ) : (
           <Route path="*" element={<Navigate to="/login" replace />} />
-        )} */}
+        )}
       </Routes>
     </BrowserRouter>
   );
