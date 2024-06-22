@@ -9,16 +9,18 @@ import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
 interface ToggleColorModeProps {
   mode: PaletteMode;
   toggleColorMode: () => void;
+  color: "primary" | "inherit" | "default";
 }
 
 export default function ToggleColorMode({
   mode,
   toggleColorMode,
+  color = 'primary',
 }: ToggleColorModeProps) {
   return (
     <IconButton
       onClick={toggleColorMode}
-      color="primary"
+      color={color}
       aria-label="Theme toggle button"
     >
       {mode === 'dark' ? (

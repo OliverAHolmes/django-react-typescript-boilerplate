@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Logout } from "./pages/Logout";
-import { DataTable } from "./pages/DataTable";
+import { Dashboard } from "./pages/Dashboard";
 
 // ProtectedRoute component
 const ProtectedRoute: React.FC<{
@@ -34,7 +34,7 @@ const App = () => {
           path="/"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <DataTable />
+              <Dashboard />
             </ProtectedRoute>
           }
         />

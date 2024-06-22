@@ -52,7 +52,7 @@ export const Login = () => {
               p: { xs: 2, sm: 4 },
             }}
           >
-            <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+            <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} color="primary" />
           </Stack>
           <SignInCard />
         </Stack>
