@@ -7,13 +7,16 @@ import { PaletteMode } from "@mui/material";
 import ToggleColorMode from "../components/ToggleColorMode";
 import SignInCard from "../components/SignInCard";
 
+import useUserSettingsStore from "../store/useUserSettingsStore";
+
 export const Login = () => {
-  const [mode, setMode] = React.useState<PaletteMode>("light");
+  const { colorMode } = useUserSettingsStore();
+  const [mode, setMode] = React.useState<PaletteMode>(colorMode);
   const defaultTheme = createTheme({ palette: { mode } });
 
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+  React.useEffect(() => {
+    setMode(colorMode);
+  }, [colorMode]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -52,7 +55,7 @@ export const Login = () => {
               p: { xs: 2, sm: 4 },
             }}
           >
-            <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} color="primary" />
+            <ToggleColorMode mode={mode} color="primary" />
           </Stack>
           <SignInCard />
         </Stack>

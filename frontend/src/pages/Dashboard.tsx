@@ -19,12 +19,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { PaletteMode } from "@mui/material";
 import ToggleColorMode from "../components/ToggleColorMode";
 import { DataTable } from "../components/DataTable";
 import { LogoutModal } from "../components/LogoutModal";
+import useUserSettingsStore from "../store/useUserSettingsStore";
 
 const drawerWidth = 240;
 
@@ -100,9 +101,14 @@ const Drawer = styled(MuiDrawer, {
 export const Dashboard = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [mode, setMode] = React.useState<PaletteMode>("light");
+  const { colorMode } = useUserSettingsStore();
+  const [mode, setMode] = React.useState<PaletteMode>(colorMode);
   const defaultTheme = createTheme({ palette: { mode } });
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
+
+  React.useEffect(() => {
+    setMode(colorMode);
+  }, [colorMode]);
 
   const handleLogoutClick = () => {
     setLogoutModalOpen(true);
@@ -110,10 +116,6 @@ export const Dashboard = () => {
 
   const handleLogoutModalClose = () => {
     setLogoutModalOpen(false);
-  };
-
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   const handleDrawerOpen = () => {
@@ -152,7 +154,7 @@ export const Dashboard = () => {
               Mini variant drawer
             </Typography>
             <Box sx={{ ml: "auto" }}>
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} color="inherit" />
+              <ToggleColorMode mode={mode} color="inherit" />
             </Box>
           </Toolbar>
         </AppBar>
@@ -217,31 +219,31 @@ export const Dashboard = () => {
             ))}
           </List>
           <List>
-        <ListItem disablePadding sx={{ display: 'block' }}>
-          <ListItemButton
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-            onClick={() => {
-                console.log('Logout');
-                handleLogoutClick();
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
-        </ListItem>
-      </List>
+            <ListItem disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+                onClick={() => {
+                  console.log("Logout");
+                  handleLogoutClick();
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <LogoutIcon />
+                </ListItemIcon>
+                <ListItemText primary="Logout" sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />

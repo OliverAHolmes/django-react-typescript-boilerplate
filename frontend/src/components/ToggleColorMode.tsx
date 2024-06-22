@@ -5,18 +5,22 @@ import IconButton from '@mui/material/IconButton';
 
 import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';
 import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
+import useUserSettingsStore from '../store/useUserSettingsStore';
 
 interface ToggleColorModeProps {
   mode: PaletteMode;
-  toggleColorMode: () => void;
   color: "primary" | "inherit" | "default";
 }
 
 export default function ToggleColorMode({
   mode,
-  toggleColorMode,
   color = 'primary',
 }: ToggleColorModeProps) {
+  const { colorMode, updateColorMode } = useUserSettingsStore();
+
+  const toggleColorMode = () => {
+    updateColorMode(colorMode === 'light' ? 'dark' : 'light');
+  };
   return (
     <IconButton
       onClick={toggleColorMode}

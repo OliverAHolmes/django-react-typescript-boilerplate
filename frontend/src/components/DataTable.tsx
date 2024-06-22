@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridValidRowModel } from "@mui/x-data-grid";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -25,7 +25,7 @@ const columns: GridColDef[] = [
 ];
 
 export const DataTable = () => {
-  const [rows, setRows] = React.useState<unknown[]>([]);
+  const [rows, setRows] = React.useState<GridValidRowModel[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
 
   React.useEffect(() => {
