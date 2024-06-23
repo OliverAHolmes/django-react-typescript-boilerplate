@@ -2,20 +2,13 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Card as MuiCard } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
-import Divider from "@mui/material/Divider";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-
 import { styled } from "@mui/material/styles";
-
 import ForgotPassword from "./ForgotPassword";
-import { GoogleIcon, FacebookIcon, SitemarkIcon } from "./CustomIcons";
-
 import useAuthStore from "../store/useAuthStore";
 import { Navigate } from "react-router-dom";
 
@@ -54,14 +47,40 @@ export default function SignInCard() {
     setOpen(false);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // if (!validateInputs()) return;
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    login();
+    const email = data.get("email");
+    const password = data.get("password");
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/auth/login/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          accept: "application/json",
+        },
+        body: JSON.stringify({
+          username: email,
+          // email: email,
+          password: password,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      if (result.key) {
+        login(result.key);
+        localStorage.setItem("apiKey", result.key);
+      }
+    } catch (error) {
+      console.error("There was a problem with the login request:", error);
+    }
   };
 
   const validateInputs = () => {
@@ -94,13 +113,17 @@ export default function SignInCard() {
   return (
     <Card>
       {isLoggedIn && <Navigate to="/" replace={true} />}
-      <Box sx={{ display: { xs: "flex", md: "none" } }}>
+      {/* <Box sx={{ display: { xs: "flex", md: "none" } }}>
         <SitemarkIcon />
-      </Box>
+      </Box> */}
       <Typography
         component="h1"
         variant="h4"
-        sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
+        sx={{
+          width: "100%",
+          fontSize: "clamp(2rem, 10vw, 2.15rem)",
+          paddingTop: "1rem",
+        }}
       >
         Sign in
       </Typography>
@@ -108,7 +131,7 @@ export default function SignInCard() {
         component="form"
         onSubmit={handleSubmit}
         noValidate
-        sx={{ display: "flex", flexDirection: "column", width: "100%", gap: 2 }}
+        sx={{ display: "flex", flexDirection: "column", width: "100%", gap: 2, paddingBottom: "15rem" }}
       >
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
@@ -155,10 +178,10 @@ export default function SignInCard() {
             color={passwordError ? "error" : "primary"}
           />
         </FormControl>
-        <FormControlLabel
+        {/* <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}
           label="Remember me"
-        />
+        /> */}
         <ForgotPassword open={open} handleClose={handleClose} />
         <Button
           type="submit"
@@ -168,11 +191,11 @@ export default function SignInCard() {
         >
           Sign in
         </Button>
-        <Link variant="body2" sx={{ alignSelf: "center" }}>
+        {/* <Link variant="body2" sx={{ alignSelf: "center" }}>
           Don&apos;t have an account? Sign up
-        </Link>
+        </Link> */}
       </Box>
-      <Divider>or</Divider>
+      {/* <Divider>or</Divider>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <Button
           type="submit"
@@ -194,7 +217,7 @@ export default function SignInCard() {
         >
           Sign in with Facebook
         </Button>
-      </Box>
+      </Box> */}
     </Card>
   );
 }

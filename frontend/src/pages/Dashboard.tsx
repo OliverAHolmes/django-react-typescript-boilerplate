@@ -177,7 +177,7 @@ export const Dashboard = () => {
                 link: "/todo",
               },
               { text: "Users", icon: <RecentActorsIcon />, link: "/users" },
-            ].map((item, index) => (
+            ].map((item) => (
               <ListItem
                 key={item.text}
                 disablePadding

@@ -31,8 +31,21 @@ export const DataTable = () => {
   React.useEffect(() => {
     const fetchData = async () => {
       try {
+        const apiKey = localStorage.getItem("apiKey");
+
+        if (!apiKey) {
+          console.error("No authentication key found");
+          return;
+        }
+
         const response = await fetch(
-          "http://127.0.0.1:8000/users/?format=json"
+          "http://127.0.0.1:8000/users/?format=json",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${apiKey}`,
+            },
+          }
         );
         const data = await response.json();
 

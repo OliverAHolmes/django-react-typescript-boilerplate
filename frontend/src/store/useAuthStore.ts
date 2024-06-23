@@ -3,19 +3,18 @@ import { persist } from "zustand/middleware";
 
 interface AuthStore {
   isLoggedIn: boolean;
-  login: () => void;
+  apiKey: string;
+  login: (apiKey: string) => void;
   logout: () => void;
 }
 const useAuthStore = create(
   persist<AuthStore>(
     (set) => ({
       isLoggedIn: false,
-      login: () => {
-        // const userLocalStorage = localStorage.getItem("accessToken");
-        // if (userLocalStorage) {
-        //   set({ isLoggedIn: true });
-        // }
+      apiKey: "",
+      login: (apiKey: string) => {
         set({ isLoggedIn: true });
+        set({ apiKey: apiKey });
       },
       logout: () => {
         set({ isLoggedIn: false });
