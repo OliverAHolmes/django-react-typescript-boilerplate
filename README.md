@@ -105,10 +105,22 @@ The backend will be running on http://localhost:8000 and the frontend on http://
 bun run cypress:open
 ```
 
-Run Cypress tests headlessly:
+### Run Cypress tests headlessly:
 
 ```sh
 bun run cypress:run
+```
+
+### Run Full automated e2e tests:
+
+```sh
+make open-full-e2e-tests
+```
+
+### Run Full automated e2e tests headlessly:
+
+```sh
+make run-full-e2e-tests
 ```
 
 ## Project Structure
