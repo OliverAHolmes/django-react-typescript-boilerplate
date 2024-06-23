@@ -3,9 +3,6 @@ from dj_rest_auth.views import LoginView, LogoutView
 from django.urls import path
 
 
-from . import views
-
-
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="rest_register"),
     path("login/", LoginView.as_view(), name="rest_login"),

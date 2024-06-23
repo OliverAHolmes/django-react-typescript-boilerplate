@@ -1,6 +1,12 @@
 activate:
 	poetry shell
 
+install:
+	poetry install --no-root
+
+generate-requirements:
+	poetry export -f requirements.txt --output requirements.txt
+
 run:
 	python3 ./api/manage.py runserver
 

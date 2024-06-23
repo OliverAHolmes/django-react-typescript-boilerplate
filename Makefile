@@ -1,5 +1,10 @@
 VENV_ACTIVATE = . .venv/bin/activate
 
+set-backend-venv:
+	@echo "Setting up backend virtual environment..."
+	@cd backend && make install 
+	@cd backend && make generate-requirements
+
 clear-backend:
 	@echo "Clearing backend..."
 	@rm -rf backend/api/db.sqlite3
@@ -31,6 +36,7 @@ open-cypress:
 
 run-full-e2e-tests:
 	@echo "Starting development environment..."
+	@make set-backend-venv
 	@make clear-backend
 	@make make-superuser
 	@make start-backend &
@@ -41,6 +47,7 @@ run-full-e2e-tests:
 
 open-full-e2e-tests:
 	@echo "Starting development environment..."
+	@make set-backend-venv
 	@make clear-backend
 	@make make-superuser
 	@make start-backend &
