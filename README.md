@@ -11,8 +11,6 @@ This is a boilerplate project for building a full stack application with Django 
 - [Running the Application](#running-the-application)
 - [Running Tests](#running-tests)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Requirements
 
