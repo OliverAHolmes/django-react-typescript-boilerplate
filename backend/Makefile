@@ -16,7 +16,7 @@ use-local-for-virtualenv:
 create_superuser:
 	export DJANGO_SUPERUSER_USERNAME=test && \
     export DJANGO_SUPERUSER_EMAIL=test@example.com && \
-    export DJANGO_SUPERUSER_PASSWORD=password && \
+    export DJANGO_SUPERUSER_PASSWORD=RpQ@i2#uF5ph8BuV && \
     python3 manage.py createsuperuser --noinput
 
 make-migrations:
