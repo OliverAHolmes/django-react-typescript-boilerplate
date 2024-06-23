@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "rgb-earth-backend"
+name = "backend"
 version = "0.1.0"
 description = ""
 authors = ["Oliver Holmes <oliver.albert.holmes@gmail.com>"]

@@ -1,1 +1,1 @@
-# RGB Earth for the Web
+# Django React Boilerplate
