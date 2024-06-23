@@ -10,6 +10,8 @@ import {
 import { Login } from "./pages/Login";
 import { Logout } from "./pages/Logout";
 import { Dashboard } from "./pages/Dashboard";
+import { ToDo } from "./components/ToDo";
+import { DataTable } from "./components/DataTable";
 
 // ProtectedRoute component
 const ProtectedRoute: React.FC<{
@@ -37,10 +39,14 @@ const App = () => {
               <Dashboard />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route path="" element={<ToDo />} />
+          <Route path="todo" element={<ToDo />} />
+          <Route path="users" element={<DataTable />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        {isLoggedIn ? (
+        {!isLoggedIn ? (
           <Route path="*" element={<Navigate to="/" replace />} />
         ) : (
           <Route path="*" element={<Navigate to="/login" replace />} />
