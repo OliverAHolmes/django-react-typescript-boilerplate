@@ -10,9 +10,9 @@ start-frontend:
 
 run-cypress:
 	@echo "Running Cypress tests..."
-	@cd frontend && bun cypress open
+	@cd frontend && bun cypress run
 
-dev:
+run-full-e2e-tests:
 	@echo "Starting development environment..."
 	@make start-backend &
 	@make start-frontend &
