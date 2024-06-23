@@ -10,9 +10,6 @@ generate-requirements:
 run:
 	python3 ./api/manage.py runserver
 
-format-and-lint:
-	ruff format . && ruff check .
-
 use-local-for-virtualenv:
 	poetry config virtualenvs.in-project true
 
@@ -29,10 +26,10 @@ migrate:
 	python3 manage.py migrate
 
 test:
-	python3 ./api/manage.py test
+	cd api && python3 manage.py test
 
 test-coverage:
-	coverage run --source='.' ./api/manage.py test && coverage html && coverage report
+	cd api && coverage run --source='.' ./manage.py test && coverage html && coverage report
 
 format:
 	ruff format .
@@ -42,3 +39,6 @@ lint:
 
 lint_fix:
 	ruff check --fix .
+
+format-and-lint:
+	ruff format . && ruff check .
