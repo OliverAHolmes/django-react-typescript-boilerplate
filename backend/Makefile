@@ -8,6 +8,7 @@ generate-requirements:
 	poetry export -f requirements.txt --output requirements.txt
 
 run:
+	lsof -ti tcp:8000 | xargs kill -9   
 	python3 ./api/manage.py runserver
 
 use-local-for-virtualenv:

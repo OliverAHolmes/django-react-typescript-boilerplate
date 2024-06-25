@@ -2,8 +2,8 @@ describe("The ToDo List Test", () => {
   it("successfully loads", () => {
     cy.visit("/login");
     /* ==== Generated with Cypress Studio ==== */
-    cy.get("#email").clear("test@test.com");
-    cy.get("#email").type("test@test.com");
+    cy.get("#email").clear("test@example.com");
+    cy.get("#email").type("test@example.com");
     cy.get("#password").clear("RpQ@i2#uF5ph8BuV");
     cy.get("#password").type("RpQ@i2#uF5ph8BuV");
     cy.get(".css-7004js > .MuiButtonBase-root").click();

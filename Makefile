@@ -12,7 +12,7 @@ clear-backend:
 
 make-superuser:
 	@echo "Creating superuser..."
-	@cd backend && $(VENV_ACTIVATE) && python3 api/manage.py shell -c "from users.models import CustomUser; user=CustomUser.objects.create_user('test@test.com', password='RpQ@i2#uF5ph8BuV'); user.is_superuser=True; user.is_staff=True; user.save()"
+	@cd backend && $(VENV_ACTIVATE) && python3 api/manage.py shell -c "from users.models import CustomUser; user=CustomUser.objects.create_user('test@example.com', password='RpQ@i2#uF5ph8BuV'); user.is_superuser=True; user.is_staff=True; user.save()"
 
 start-backend:
 	@echo "Starting Django backend server..."
